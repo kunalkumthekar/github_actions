@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../src/smartscale.h"
+#include "smartscale.h"
 
 TEST(ST24, SyncAfterReconnect) {
     SmartScale s;
