@@ -8,6 +8,7 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            - uses: actions/checkout@v4
             # Building source, test
             - name: Building and Launching test cases
               run: |
