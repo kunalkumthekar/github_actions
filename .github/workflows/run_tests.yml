@@ -1,0 +1,15 @@
+name: BIZ
+on: 
+    push:
+    pull_request:
+    workflow_dispatch:
+jobs:
+    build:
+        runs-on: self-hosted
+
+        steps:
+            # Building source, test
+            - name: Building and Launching test cases
+              run: |
+                chmod +x launch_unit_tests.sh
+                ./launch_unit_tests.sh
