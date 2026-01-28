@@ -1,3 +1,6 @@
+#include <gtest/gtest.h>
+#include "../src/smartscale.h"
+
 TEST(ST08, RejectUnstableWeight) {
     SmartScale s;
     s.connectScale();

@@ -1,3 +1,6 @@
+#include <gtest/gtest.h>
+#include "../src/smartscale.h"
+
 TEST(ST20, PrinterDisconnectedSimulation) {
     SmartScale s;
     s.connectScale();

@@ -1,3 +1,6 @@
+#include <gtest/gtest.h>
+#include "../src/smartscale.h"
+
 TEST(ST25, PreventDuplicateSync) {
     SmartScale s;
     s.connectScale();
