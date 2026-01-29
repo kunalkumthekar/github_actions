@@ -20,6 +20,8 @@ set(TEST_CASES_PATH ${CMAKE_CURRENT_SOURCE_DIR}/tests/)
 #####################################
 file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 # if multiple sources set it under one variable
+# Setting source as lib as it shall not be executed,
+# but rather only as includes for test cases
 add_library(${TARGET_NAME} ${SOURCES})
 
 #####################################
