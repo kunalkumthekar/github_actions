@@ -20,6 +20,8 @@ public:
     void setServerAvailable(bool state);
     bool isServerAvailable() const;
 
+    void weightStabilityTimeout(int timeout_);
+
     bool startCheckout(double weight, double unitPrice);
     bool completeTransaction();
 
@@ -31,6 +33,7 @@ private:
     bool serverAvailable;
     double currentWeight;
     double currentPrice;
+    int timeout;
     std::vector<Transaction> localDb;
 
     std::string generateId();

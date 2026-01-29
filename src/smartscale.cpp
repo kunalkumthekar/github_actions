@@ -3,7 +3,7 @@
 
 SmartScale::SmartScale()
     : scaleConnected(false), serverAvailable(true),
-      currentWeight(0), currentPrice(0) {}
+      currentWeight(0), currentPrice(0), timeout(5) {}
 
 bool SmartScale::connectScale() {
     scaleConnected = true;
@@ -16,6 +16,13 @@ void SmartScale::disconnectScale() {
 
 bool SmartScale::isScaleConnected() const {
     return scaleConnected;
+}
+
+void SmartScale::weightStabilityTimeout(int timeout_) {
+    if (timeout_ > timeout || !scaleConnected) return;
+    Transaction t;
+    t.weight = currentWeight;
+    disconnectScale();
 }
 
 void SmartScale::setServerAvailable(bool state) {
