@@ -20,7 +20,7 @@ bool SmartScale::isScaleConnected() const {
 
 void SmartScale::weightStabilityTimeout(int timeout_) {
     if (timeout_ > timeout || !scaleConnected) return;
-    Transaction t;
+    smartscale::Transaction t;
     t.weight = currentWeight;
     disconnectScale();
 }
@@ -43,7 +43,7 @@ bool SmartScale::startCheckout(double weight, double unitPrice) {
 bool SmartScale::completeTransaction() {
     if (!scaleConnected) return false;
 
-    Transaction t;
+    smartscale::Transaction t;
     t.id = generateId();
     t.weight = currentWeight;
     t.unitPrice = currentPrice;
@@ -53,7 +53,7 @@ bool SmartScale::completeTransaction() {
     return true;
 }
 
-std::vector<Transaction> SmartScale::getLocalTransactions() const {
+std::vector<smartscale::Transaction> SmartScale::getLocalTransactions() const {
     return localDb;
 }
 

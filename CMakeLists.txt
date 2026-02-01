@@ -1,7 +1,7 @@
 #####################################
 # Project
 #####################################
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.28)
 set(TARGET_NAME "BIZ")
 set(TEST_TARGET "BIZ_test")
 project(${TARGET_NAME}
@@ -29,6 +29,7 @@ add_library(${TARGET_NAME} ${SOURCES})
 #####################################
 target_include_directories(${TARGET_NAME}
     PUBLIC ${CMAKE_SOURCE_DIR}/src/
+    PUBLIC ${CMAKE_SOURCE_DIR}/include/
     PUBLIC ${TEST_CASES_PATH})
 
 #####################################
@@ -53,13 +54,13 @@ file(GLOB SOURCE_TEST ${TEST_CASES_PATH}/*.cpp)
 
 add_executable(${TEST_TARGET} ${SOURCE_TEST} ${GTEST_MAIN_LIBRARIES})
 
-find_package(GTest REQUIRED)
+find_package(GTest CONFIG REQUIRED COMPONENTS GTest)
 
-target_include_directories(${TEST_TARGET}
-    PRIVATE ${GTEST_INCLUDE_DIRS})
+# target_include_directories(${TEST_TARGET}
+#     PRIVATE ${GTEST_INCLUDE_DIRS})
 
 target_link_libraries(${TEST_TARGET}
-    PRIVATE ${GTEST_LIBRARIES}
+    PRIVATE GTest::gtest
     PRIVATE ${TARGET_NAME})
 
 target_compile_options(${TEST_TARGET} PRIVATE -Wall -Wpedantic)
