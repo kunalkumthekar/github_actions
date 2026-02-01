@@ -34,8 +34,8 @@ private:
     void set_motor_pwm(float speed) { /* Sets PWM registers */ }
 };
 
-int main() {
-    bool gaurd_open = true;
-    int deadline = 10;
+// int main() {
+//     bool gaurd_open = true;
+//     int deadline = 10;
     
-}
+// }
