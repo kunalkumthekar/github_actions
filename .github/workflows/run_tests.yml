@@ -1,0 +1,27 @@
+name: BIZ
+on:
+  # define what triggers the action 
+    push:
+    pull_request:
+    workflow_dispatch:
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            # Picks up the commit number and performs steps
+            - uses: actions/checkout@v4
+            # installing Google Test on the runner
+            - name: Installing Google Test
+              run: |
+                sudo apt-get update
+                sudo apt-get install -y libgtest-dev cmake
+                cd /usr/src/gtest
+                sudo cmake .
+                sudo make
+                sudo cp lib/*.a /usr/lib
+            # Building source, test
+            - name: Building and Launching test cases
+              run: |
+                chmod +x launch_unit_tests.sh
+                ./launch_unit_tests.sh
