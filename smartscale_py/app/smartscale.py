@@ -1,4 +1,4 @@
-from hal import Iscale, IPrinter, IServer, Transaction, Product
+from app.hal import Iscale, IPrinter, IServer, Transaction, Product
 from typing import List
 import time
 
