@@ -26,6 +26,10 @@ namespace hal{
 // Interfaces for mocking Hardware
 
 class IScale {
+    /*
+    Weighing Scale interface: Shall give confirmation of
+    successfull connection, weight placed on the scale
+    */
     public:
         virtual ~IScale() = default;
         virtual bool connect(std::string connectString) = 0;
@@ -34,6 +38,10 @@ class IScale {
 };
 
 class IServer {
+    /*
+    Server Interface: Shall fetch list of accepted products,
+    sync transaction with server after server downtime
+    */
     public:
         virtual ~IServer() = default;
         virtual std::vector<Product> fetchProductList() = 0;
@@ -42,6 +50,9 @@ class IServer {
 };
 
 class IPrinter {
+    /*
+    Shall print label after inputting barcode and text data
+    */
     public:
         virtual ~IPrinter() = default;
         virtual bool printLabel(std::string barcode, std::string text) = 0;

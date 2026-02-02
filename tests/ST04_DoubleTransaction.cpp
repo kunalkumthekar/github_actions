@@ -26,6 +26,8 @@
         public:
             std::vector<Product> list;
             std::vector<Product> fetchProductList() override {
+                // Providing repeated data to check if database record only one of
+                // the duplicate and avoids the other
                 list.push_back({5,"orange", 50});
                 list.push_back({5,"orange", 50});
                 return list;
@@ -44,6 +46,9 @@
         } 
     };
     class DoubleTransaction : public ::testing::Test {
+        /*
+        Fixture class which shall instantiate the main class by calling mock classes in it
+        */
         protected:
             std::shared_ptr<mockScale> scale;
             std::shared_ptr<mockIserver> server;

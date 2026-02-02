@@ -48,6 +48,9 @@ class mockPrinter : public IPrinter {
        } 
 };
 class CheckoutFalseProduct : public ::testing::Test {
+        /*
+        Fixture class which shall instantiate the main class by calling mock classes in it
+        */
     protected:
         std::shared_ptr<mockScale> scale;
         std::shared_ptr<mockIserver> server;

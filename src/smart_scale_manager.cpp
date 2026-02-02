@@ -6,6 +6,10 @@ SmartScaleManager::SmartScaleManager(std::shared_ptr<IScale> s, std::shared_ptr<
                 scale(s), server(srv), printer(p) {}
 
 bool SmartScaleManager::initialize(std::string connectionPath) {
+    /*
+    Initializes the scale by confirming if connection to server is made,
+    Products are fetched from the server
+    */
     if (scale->connect(connectionPath)) {
         // Populating productList as it shall be needed to test
         //if tests based on false product Id fails!!
@@ -21,6 +25,7 @@ double SmartScaleManager::calculatePrice(double weight, double unitPrice) {
     return std::round(price * 100.0) / 100.0; // Round to 2 decimals
 }
 
+// CHeck if object placed on scale has stabilized.
 bool SmartScaleManager::isWeightStable(double currentWeight) {
     if (std::abs(currentWeight - lastWeight) <= 0.002) {
         return true; 
@@ -51,15 +56,21 @@ bool SmartScaleManager::performCheckout(int productId, double weight) {
     t.totalPrice = calculatePrice(weight, it->unit_price);
     t.timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 
+    // Protecting the section of sending data to local database, and printing label
     std::lock_guard<std::mutex> lock(dbMutex);
     localDb.push_back(t);
 
     // Print Label
     std::cout << "DEBUG: About to call printer..." << std::endl;
     return printer->printLabel(t.id, it->name + " Total: " + std::to_string(t.totalPrice));
+    // Mutex released as the scope of the methods ends
 }
         
 int SmartScaleManager::syncWithServer() {
+    /*
+    database which is populated during performCheckout method is now synced to database
+    If syncTransactions is off and server is not availaible, the data shall be stored offline
+    */
     if (!server->isAvailaible()) return 0;
 
     std::lock_guard<std::mutex> lock(dbMutex);
@@ -68,10 +79,12 @@ int SmartScaleManager::syncWithServer() {
     // Try to sync all local transactions
     auto it = localDb.begin();
     while (it != localDb.end()) {
+        // Check if server is offline and if ON :
         if (server->syncTransactions(*it)) {
             it = localDb.erase(it); // Remove from local once synced
             syncedCount++;
         } else {
+            // Store data offline
             ++it;
         }
     }

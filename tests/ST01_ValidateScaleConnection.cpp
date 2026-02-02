@@ -13,7 +13,7 @@ public:
 class MockServer : public IServer {
 public:
     std::vector<Product> fetchProductList() override {
-        // FIX: You must push a product or 'at(0)' will crash!
+        // TODO: parse product list from TEST
         std::vector<Product> list;
         list.push_back({1, "Apple", 100.0});
         return list;
@@ -30,8 +30,10 @@ public:
 // Setting up the fixture for Gtest
 
 class ValidateScaleConnection : public ::testing::Test {
+/*
+Fixture class which shall instantiate the main class by calling mock classes in it
+*/
 protected:
-    // 2. Use shared_ptr for the mocks so they can be passed to the SUT
     std::shared_ptr<MockScale> s;
     std::shared_ptr<MockServer> srv;
     std::shared_ptr<MockPrinter> p;
@@ -41,8 +43,6 @@ protected:
         s = std::make_shared<MockScale>();
         srv = std::make_shared<MockServer>();
         p = std::make_shared<MockPrinter>();
-
-        // 3. Dependency Injection: Pass the actual instances
         sManager = std::make_unique<SmartScaleManager>(s, srv, p);
     }
 };

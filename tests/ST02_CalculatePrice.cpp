@@ -26,6 +26,7 @@ class mockScale : public IScale {
     class mockIserver : public IServer {
         public:
             std::vector<Product> fetchProductList() override {
+                // Manually adding a product in the database for the scale to fetch
                 std::vector<Product> list;
                 list.push_back({2,"orange", 50});
                 return list;
@@ -48,6 +49,9 @@ class mockScale : public IScale {
     };
 
     class CalculatePrice : public ::testing::Test {
+        /*
+        Fixture class which shall instantiate the main class by calling mock classes in it
+        */
         protected:
             std::shared_ptr<mockScale> scale;
             std::shared_ptr<mockIserver> server;

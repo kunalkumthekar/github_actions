@@ -1,5 +1,6 @@
 name: BIZ
-on: 
+on:
+  # define what triggers the action 
     push:
     pull_request:
     workflow_dispatch:
