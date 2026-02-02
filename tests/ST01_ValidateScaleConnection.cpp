@@ -51,4 +51,9 @@ TEST_F(ValidateScaleConnection, Validation) {
     // Now sManager is safely initialized with valid pointers
     bool result = sManager->initialize("10.20.2.60");
     EXPECT_TRUE(result);
+    
+    double weight = 2.5;
+    double unit_price = 2;
+    EXPECT_EQ(sManager->calculatePrice(weight, unit_price), 5.0);
+
 }

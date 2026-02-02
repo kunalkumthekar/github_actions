@@ -7,7 +7,10 @@ SmartScaleManager::SmartScaleManager(std::shared_ptr<IScale> s, std::shared_ptr<
 
 bool SmartScaleManager::initialize(std::string connectionPath) {
     if (scale->connect(connectionPath)) {
-        server->fetchProductList();
+        // Populating productList as it shall be needed to test
+        //if tests based on false product Id fails!!
+        this->productList = server->fetchProductList();
+        std::cout << "DEBUG: Fetched " << productList.size() << " products." << std::endl;
         return true;
     }
     return false;
@@ -52,6 +55,7 @@ bool SmartScaleManager::performCheckout(int productId, double weight) {
     localDb.push_back(t);
 
     // Print Label
+    std::cout << "DEBUG: About to call printer..." << std::endl;
     return printer->printLabel(t.id, it->name + " Total: " + std::to_string(t.totalPrice));
 }
         
@@ -74,5 +78,5 @@ int SmartScaleManager::syncWithServer() {
     return syncedCount;
 }
 
-    size_t SmartScaleManager::getLocalDbSize() {
-        return localDb.size(); }
+size_t SmartScaleManager::getLocalDbSize() {
+    return localDb.size(); }

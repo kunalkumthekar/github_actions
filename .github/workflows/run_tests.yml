@@ -8,6 +8,7 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            # Picks up the commit number and performs steps
             - uses: actions/checkout@v4
             # installing Google Test on the runner
             - name: Installing Google Test

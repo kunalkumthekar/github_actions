@@ -54,7 +54,7 @@ file(GLOB SOURCE_TEST ${TEST_CASES_PATH}/*.cpp)
 
 add_executable(${TEST_TARGET} ${SOURCE_TEST})
 
-find_package(GTest CONFIG REQUIRED COMPONENTS GTest)
+find_package(GTest REQUIRED)
 
 # target_include_directories(${TEST_TARGET}
 #     PRIVATE ${GTEST_INCLUDE_DIRS})
@@ -62,7 +62,8 @@ find_package(GTest CONFIG REQUIRED COMPONENTS GTest)
 target_link_libraries(${TEST_TARGET}
     PRIVATE GTest::gtest
     PRIVATE GTest::gtest_main
-    PRIVATE ${TARGET_NAME})
+    PRIVATE ${TARGET_NAME}
+)
 
 target_compile_options(${TEST_TARGET} PRIVATE -Wall -Wpedantic)
 

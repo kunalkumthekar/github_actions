@@ -16,6 +16,7 @@ class SmartScaleManager {
 
         std::vector<Product> productList;
         std::vector<hal::Transaction> localDb;
+        
         // Mutex to gaurd sending data over server
         std::mutex dbMutex;
         double lastWeight = 0.0;
@@ -25,6 +26,10 @@ class SmartScaleManager {
         // Constructor
             SmartScaleManager(std::shared_ptr<IScale> s, std::shared_ptr<IServer> srv, std::shared_ptr<IPrinter> p);
             
+            std::vector<Product> getProductList();
+
+            void setProductList(std::vector<Product> prod);
+
             bool initialize(std::string connectionPath);
 
             double calculatePrice(double weight, double unitPrice);
