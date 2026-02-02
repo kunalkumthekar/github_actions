@@ -39,4 +39,5 @@ jobs:
             - name: Run Tests
               run: |
                 cd smartscale_py
+                export PYTHONPATH=$PWD
                 pytest -v
