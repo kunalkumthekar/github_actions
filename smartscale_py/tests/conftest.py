@@ -1,7 +1,9 @@
-import pytest
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from app.smartscale import SmartScaleManager
 from app.hal import Product
-
+import pytest
 
 class MockScale:
     def __init__(self):
@@ -23,8 +25,8 @@ class MockServer:
         self.available = available
         self.synced = []
 
-    def fetch_product_list(self):
-        return [Product(1, "Cheese", 10.0)]
+    def fetchProductList(self):
+        return [Product("Cheese", 1, 10.0, 100.0, 123)]
 
     def sync_transaction(self, tx):
         if not self.available:

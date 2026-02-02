@@ -13,7 +13,7 @@ class SmartScaleManager:
     
     def initialize(self, connectionPath: str) -> bool:
         if self.scale.connect(connectionPath):
-            self.productList = self.server.fetch_product_list()
+            self.productList = self.server.fetchProductList()
             return True
         else:
             return False
@@ -33,7 +33,7 @@ class SmartScaleManager:
         if weight < 0:
             return False
 
-        product = next((p for p in self.product_list if p.id == product_id), None)
+        product = next((p for p in self.productList if p.id == product_id), None)
         if not product:
             return False
 
