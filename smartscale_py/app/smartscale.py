@@ -13,7 +13,7 @@ class SmartScaleManager:
     
     def initialize(self, connectionPath: str) -> bool:
         if self.scale.connect(connectionPath):
-            self.productList = self.server.fetchProductList()
+            self.productList = self.server.fetch_product_list()
             return True
         else:
             return False
