@@ -41,3 +41,14 @@ jobs:
                 cd smartscale_py
                 export PYTHONPATH=$PWD
                 pytest -v
+            
+            #TODO............Upload artifacts, compile using coverage flag for code coverage report.........
+            # -name: Upload Artifacts
+            # uses: actions@upload-artifacts
+            # with: path/
+
+            # Also use lcov to return code coverage reports from buildfiles
+            #(code compiled using --coverage flags)
+
+            # Add checks for flaky test:
+            # eg: ctest --RFlacky_test --run-until-fails 50

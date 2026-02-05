@@ -19,3 +19,6 @@ echo -e "Build Successful....."
 #######################
 echo -e "Launching Test Cases........"
 ./build/BIZ_test
+
+# TODO: upload artifacts, export test case results in xml format
+# to upload to Jira-Xray
